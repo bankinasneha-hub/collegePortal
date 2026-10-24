@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Portal</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f0f4ff;
+      color: #1e293b;
+    }
+
+    header {
+      background: #2447c6;
+      color: white;
+      padding: 22px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 420px;
+      margin: 50px auto;
+      padding: 28px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px #00000012;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin: 16px 0 7px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      margin-top: 22px;
+      background: #2447c6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #message {
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Student Portal</h1>
+    <p>Welcome to Your Student Dashboard</p>
+  </header>
+
+  <div class="container">
+    <h2>Student Login</h2>
+
+    <form id="loginForm">
+      <label for="email">Email Address</label>
+      <input id="email" type="email"
+        placeholder="Enter your email" required>
+
+      <label for="roll">Roll Number</label>
+      <input id="roll" type="text"
+        placeholder="Enter your roll number" required>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p id="message"></p>
+  </div>
+
+<script>
+  
+  const students = [
+    {
+      name: "Sneha",
+      email: "sneha@example.com",
+      roll: "24JNA33010"
+    },
+    {
+      name: "Ravi",
+      email: "ravi@example.com",
+      roll: "24JNA33011"
+    }
+  ];
+
+  document.getElementById("loginForm")
+    .addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email")
+        .value.trim().toLowerCase();
+
+      const roll = document.getElementById("roll")
+        .value.trim().toUpperCase();
+
+      const student = students.find(function(item) {
+        return item.email.toLowerCase() === email &&
+               item.roll.toUpperCase() === roll;
+      });
+
+      if (student) {
+        document.querySelector(".container").innerHTML = `
+          <h2>Welcome, ${student.name}!</h2>
+          <p><strong>Student Name:</strong> ${student.name}</p>
+          <p><strong>Email:</strong> ${student.email}</p>
+          <p><strong>Roll Number:</strong> ${student.roll}</p>
+          <p>Login Successful!</p>
+          <button onclick="location.reload()">Logout</button>
+        `;
+      } else {
+        document.getElementById("message").textContent =
+          "Invalid Email or Roll Number. Please try again.";
+      }
+    });
+</script>
+</body>
+</html>
+  
+</body>
+</html>
